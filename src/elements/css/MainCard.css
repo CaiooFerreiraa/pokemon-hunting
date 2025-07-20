@@ -1,0 +1,8 @@
+#main-card {
+  width: 95%;
+  height: 70%;
+  background-color: bisque;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  margin: 20px auto 0 auto;
+}

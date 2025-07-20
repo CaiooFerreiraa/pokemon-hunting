@@ -1,0 +1,5 @@
+#main-card-pokemon {
+  background-color: brown;
+  display: grid;
+  grid-template-rows: 1fr 150px;
+}
