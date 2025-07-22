@@ -3,14 +3,14 @@ import "./css/SearchBar.css"
 
 export default function SearchBar({ setPokemonForCatch }) {
   const [pokemonList, setPokemonList] = useState([]);
-  let [offSet, setOffSet] = useState(0);
+  let [offSetPokemon, setOffSetPokemon] = useState(0);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=${offSet}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=${offSetPokemon}`)
       .then(res => res.json())
       .then(data => setPokemonList(data.results))
       .catch(error => console.error("Erro ao buscar pokémons:", error));
-  }, [offSet]);
+  }, [offSetPokemon]);
 
   function handleSearchPokemon(event) {
     event.preventDefault()
@@ -36,7 +36,8 @@ export default function SearchBar({ setPokemonForCatch }) {
 
   return (
     <div id="search-main">
-      <div>
+      <div id="search-container">
+        <div>
         <form onSubmit={handleSearchPokemon}>
           <input
             type="text"
@@ -44,23 +45,22 @@ export default function SearchBar({ setPokemonForCatch }) {
             placeholder="Search a Pokemon..."
             autoComplete="off"
           />
-          <button type="submit">Search</button>
+          <button type="submit" className="material-symbols-outlined">search</button>
         </form>
       </div>
-      <div>
         {
           pokemonList.map((pokemon, index) => {
+            const nameFormated = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
             return (
-              <button key={index} onClick={() => fetchPokemonByName(pokemon.name)}>{pokemon.name}</button>
+              <button key={index} onClick={() => fetchPokemonByName(pokemon.name)} className="search_button">{nameFormated}</button>
             )
           })
         }
-        <div> 
-          <button onClick={() => {setOffSet(prev => prev + 12)}}>Mais</button>
+        <div className="buttons_navigate"> 
           {
-            offSet >= 12 && <button onClick={() => {setOffSet(prev => prev - 12)}}>Menos</button>
+            offSetPokemon >= 12 && <button onClick={() => {setOffSetPokemon(prev => prev - 12)}} className="material-symbols-outlined previous">line_start_arrow_notch</button>
           }
-          
+          <button onClick={() => {setOffSetPokemon(prev => prev + 12)}} className="material-symbols-outlined next">line_end_arrow_notch</button>
         </div>
       </div>
     </div>

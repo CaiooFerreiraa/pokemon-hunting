@@ -1,3 +1,74 @@
+:root {
+  --height-inputAndButton: 30px;
+}
+
 #search-main {
-  background-color: aqua;
+  display: flex;
+  background-color: var(--color-darkgray);
+}
+
+#search-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 98%;
+  margin: auto;
+  padding-top: 10px;
+  border-radius: 20px;
+  align-items: center;
+  background-color: var(--color-darkred);
+
+  form {
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  input[type="text"] {
+    padding-left: 5px;
+    height: var(--height-inputAndButton);
+    font-size: 15px;
+  }
+
+  button[type="submit"] {
+    font-size: 1em;
+    color: white;
+    background-color: var(--color-darkturquesa);
+    border: none;
+    height: var(--height-inputAndButton);
+    width: 50px;
+  }
+
+  button[type="submit"]:hover {
+    cursor: pointer;
+  }
+}
+
+.search_button {
+  width: 75%;
+  height: 35px;
+  font-size: 1.2em;
+  margin: 5px 0 5px 0;
+  border-radius: 15px;
+  background-color: var(--color-red);
+  border: 2px solid black;
+  color: white;
+  font-weight: bold;
+}
+
+.search_button:hover {
+  cursor: pointer;
+  background-color: #db353e;
+}
+
+.previous, .next {
+  background-color: transparent;
+  border: none;
+  color: var(--color-darkturquesa);
+  font-size: 5em;
+}
+
+.previous, .next:hover {
+  cursor: pointer;
+  color: #1e6347;
 }

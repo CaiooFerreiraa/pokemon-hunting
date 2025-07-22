@@ -1,8 +1,36 @@
+:root {
+  --size: 180px;
+}
+
 #main-card {
   width: 95%;
   height: 70%;
-  background-color: bisque;
+  background-color: var(--color-darkred);
   display: grid;
   grid-template-columns: 230px 1fr;
   margin: 20px auto 0 auto;
+  border: 4px solid black;
+  border-radius: 30px;
+}
+
+.img-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  border-top: var(--border-img-container);
+  border-bottom: var(--border-img-container);
+  border-right: 4px solid black;
+  border-left: var(--border-img-container);
+  background-color: var(--color-red);
+  overflow: hidden;
+}
+
+.img-container img {
+  display: block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: white;
+  margin: 10px auto 0 auto;
+  border: 2px solid black;
 }

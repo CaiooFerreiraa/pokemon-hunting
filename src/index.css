@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+:root {
+  --color-darkred: #b0171c;
+  --color-darkgray: #1e1e1e;
+  --color-red: #da1e27;
+  --color-darkturquesa: #0f4c34;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,15 +25,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--color-darkred);
 }
 
 #next_pokemon {
   display: block;
   margin: auto;
-  width: 200px;
-  height: 50px;
-  background-color: #f0f0f0;
-  border: none;
-  border-radius: 5px;
+  width: 400px;
+  height: 45px;
+  background-color: var(--color-darkturquesa);
+  border: 4px solid black;
+  border-radius: 20px;
   cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
 }

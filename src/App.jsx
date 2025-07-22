@@ -25,7 +25,7 @@ export default function App() {
         <SearchBar pokemonForCatch={pokemonForCatch} setPokemonForCatch={setPokemonForCatch}/>
         <div id="main-content">
           <MainCard pokemonForCatch={pokemonForCatch}/>
-          <button id="next_pokemon" onClick={() => {handleNextPokemon()}}>Proximo Pokemon</button>
+          <button id="next_pokemon" onClick={() => {handleNextPokemon()}}>Próximo Pokemon</button>
         </div>
     </div>
   )
