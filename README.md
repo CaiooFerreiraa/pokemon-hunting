@@ -1,12 +1,69 @@
-# React + Vite
+# Pokémon Hunting Bot 🧭🔍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido em React + Vite com o objetivo de fornecer uma interface para controle e visualização de ações automatizadas de um bot de caça a Pokémon.
 
-Currently, two official plugins are available:
+## 🧩 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React 19](https://reactjs.org/)
+- [Vite 6](https://vitejs.dev/)
+- [React Router DOM 7](https://reactrouter.com/)
+- [ESLint](https://eslint.org/) para padronização de código
 
-## Expanding the ESLint configuration
+## 📁 Estrutura
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Este projeto segue uma arquitetura simples baseada em React com Vite:
+
+```bash
+├── src/
+│   └── main.jsx         # Arquivo principal da aplicação
+│   └── assets/          # Imagens e ícones
+│   └── components/      # Componentes reutilizáveis
+├── public/              # Arquivos estáticos
+├── index.html           # HTML base
+├── vite.config.js       # Configurações do Vite
+├── package.json         # Dependências e scripts
+```
+
+## 🚀 Como executar o projeto
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/seu-usuario/pokemon-hunting.git
+cd pokemon-hunting
+```
+
+2. **Instale as dependências:**
+
+```bash
+npm install
+```
+
+3. **Execute o servidor de desenvolvimento:**
+
+```bash
+npm run dev
+```
+
+Acesse em seu navegador: [http://localhost:5173](http://localhost:5173)
+
+## 🧪 Scripts disponíveis
+
+- `npm run dev`: Inicia o servidor de desenvolvimento
+- `npm run build`: Cria a versão de produção
+- `npm run preview`: Visualiza a build de produção localmente
+- `npm run lint`: Verifica problemas de lint no código
+
+## 📦 Dependências
+
+- `react`
+- `react-dom`
+- `react-router-dom`
+
+## 🛡️ Licença
+
+Distribuído sob a licença [MIT](./LICENSE).
+
+---
+
+> Ícone do projeto localizado em `src/assets/pokBot.ico`.
