@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 98%;
+  height: 98vh;
   margin: auto;
   padding-top: 10px;
   border-radius: 20px;
@@ -22,12 +22,14 @@
     display: flex;
     overflow: hidden;
     border-radius: 10px;
+    width: 90%;
   }
 
   input[type="text"] {
     padding-left: 5px;
     height: var(--height-inputAndButton);
     font-size: 15px;
+    width: 90%;
   }
 
   button[type="submit"] {
@@ -42,6 +44,23 @@
   button[type="submit"]:hover {
     cursor: pointer;
   }
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-container {
+  margin: 5px 5px 0 5px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  background-color: var(--color-red);
+  padding: 5px;
+  border: 2px solid black ;
+  border-radius: 20px;
 }
 
 .search_button {
@@ -60,6 +79,8 @@
   cursor: pointer;
   background-color: #db353e;
 }
+
+
 
 .previous, .next {
   background-color: transparent;

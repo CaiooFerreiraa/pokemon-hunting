@@ -5,6 +5,7 @@ import { useState } from "react"
 
 export default function App() {
   const [pokemonForCatch, setPokemonForCatch] = useState({});
+  const [fetchError, setFerchError] = useState(null);
 
   function handleNextPokemon() {
     const nextPokemonId = pokemonForCatch.id + 1;
@@ -15,14 +16,21 @@ export default function App() {
 
   function fetchPokemonById(id) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then(response => response.json())
-      .then(foundPokemon => setPokemonForCatch(foundPokemon))
-      .catch(error => console.error("Houve um erro ao procurar o pokemon: " + error))
+      .then(response => {
+        if (!response.ok) throw new Error("O id não foi encontrado")
+        
+        return response.json();
+      })
+      .then(foundPokemon => {
+        setPokemonForCatch(foundPokemon);
+        setFerchError(null);
+      })
+      .catch(error => setFerchError(error));
   }
 
   return (
     <div id="grid-main">
-        <SearchBar pokemonForCatch={pokemonForCatch} setPokemonForCatch={setPokemonForCatch}/>
+        <SearchBar pokemonForCatch={pokemonForCatch} setPokemonForCatch={setPokemonForCatch} fetchError={fetchError} setFerchError={setFerchError}/>
         <div id="main-content">
           <MainCard pokemonForCatch={pokemonForCatch}/>
           <button id="next_pokemon" onClick={() => {handleNextPokemon()}}>Próximo Pokemon</button>

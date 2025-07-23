@@ -4,7 +4,7 @@
 
 #main-card {
   width: 95%;
-  height: 70%;
+  height: 70vh;
   background-color: var(--color-darkred);
   display: grid;
   grid-template-columns: 230px 1fr;
@@ -34,3 +34,4 @@
   margin: 10px auto 0 auto;
   border: 2px solid black;
 }
+
