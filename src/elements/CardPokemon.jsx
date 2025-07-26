@@ -15,7 +15,9 @@ export default function CardPokemon({ pokemonForCatch }) {
   return (
     <div id="main-card-pokemon">
       <div id="card-pokemon">
-        <img src={spritePokemon ? spritePokemon : ""} alt="" />
+        <div className="img-pokemon-container">
+          <img src={spritePokemon ? spritePokemon : "/pokebola.png"} alt="" />
+        </div>
         <h1>{namePokemon ? namePokemon : "Selecione um Pokemon"}</h1>
 
         <div id="body-pokemon">

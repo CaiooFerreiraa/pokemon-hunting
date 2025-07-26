@@ -1,5 +1,54 @@
+@font-face {
+  font-family: pokemon;
+  src: url("/Pokemon Solid.ttf");
+}
+
 #main-card-pokemon {
-  background-color: brown;
+  background-color: var(--color-darkred);
   display: grid;
-  grid-template-rows: 1fr 150px;
+  grid-template-rows: 1fr 100px;
+  border-radius: 25px;
+}
+
+#card-pokemon {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  width: 90%;
+  margin: 10px auto;
+  background-color: var(--color-red);
+  border-radius: 20px;
+  align-items: center;
+}
+
+#card-pokemon h1 {
+  font-family: pokemon;
+  font-size: 2.5em;
+}
+
+.img-pokemon-container {
+  display: flex;
+  background-color:  #edd3a3;
+  width: 400px;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  border-radius: 15px;
+}
+
+.img-pokemon-container::before {
+  position: absolute;
+  content: '';
+  z-index: 1;
+  background-color: #f4e3c2;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+}
+
+.img-pokemon-container img {
+  width: 150px;
+  height: 150px;
+  z-index: 1;
 }
