@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import "./css/SearchBar.css"
+import { capitalize } from "../UtilFunctions";
 
 export default function SearchBar({ setPokemonForCatch, fetchError, setFerchError }) {
   const [pokemonList, setPokemonList] = useState([]);
@@ -57,9 +58,8 @@ export default function SearchBar({ setPokemonForCatch, fetchError, setFerchErro
         </div>
         {
           pokemonList.map((pokemon, index) => {
-            const nameFormated = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
             return (
-              <button key={index} onClick={() => fetchPokemonByName(pokemon.name)} className="search_button">{nameFormated}</button>
+              <button key={index} onClick={() => fetchPokemonByName(pokemon.name)} className="search_button">{capitalize(pokemon.name)}</button>
             )
           })
         }

@@ -6,8 +6,14 @@
 #main-card-pokemon {
   background-color: var(--color-darkred);
   display: grid;
-  grid-template-rows: 1fr 100px;
+  grid-template-rows: 1fr 200px;
   border-radius: 25px;
+}
+
+.componente-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #card-pokemon {
@@ -24,31 +30,57 @@
 #card-pokemon h1 {
   font-family: pokemon;
   font-size: 2.5em;
+  color: white;
+  text-shadow:
+    -2px -2px 0 black,
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black,
+     0px  0px 2px black;
 }
 
 .img-pokemon-container {
   display: flex;
-  background-color:  #edd3a3;
-  width: 400px;
-  height: 200px;
+  position: relative;
+  background-color: #edd3a3;
+  width: 400px;       
+  height: 200px;      
   align-items: center;
   justify-content: center;
   margin-top: 5px;
   border-radius: 15px;
+  overflow: hidden;   
 }
 
 .img-pokemon-container::before {
   position: absolute;
   content: '';
-  z-index: 1;
+  z-index: 0;
   background-color: #f4e3c2;
   width: 175px;
   height: 175px;
   border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .img-pokemon-container img {
-  width: 150px;
-  height: 150px;
+  position: relative;
   z-index: 1;
+  width: 150px;       
+  height: 150px;      
+  object-fit: contain;
+}
+
+
+
+#content-type {
+  display: flex;
+  gap: 5px;
+}
+
+.type {
+  display: flex;
+  gap: 5px;
 }
