@@ -11,7 +11,7 @@ export default function PokemonForm({pokemonForCatch}) {
         <label>Type: </label>
         <span className="type">{
           types.map((type, index) => {
-            return (<span key={index}>{type}</span>)
+            return (<span key={index}>|{type}|</span>)
           })}
         </span>
       </div>
