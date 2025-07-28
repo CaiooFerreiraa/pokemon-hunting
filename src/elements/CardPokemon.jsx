@@ -9,7 +9,6 @@ export default function CardPokemon({ pokemonForCatch }) {
   return (
     <div id="main-card-pokemon">
       <div id="card-pokemon">
-
         <PokemonImage pokemonForCatch={pokemonForCatch}/>
         <div id="body-pokemon">
           <PokemonForm pokemonForCatch={pokemonForCatch}/>

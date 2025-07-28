@@ -1,4 +1,5 @@
 import { extractTypes, extractAbilities } from "../../UtilFunctions"
+import Form from 'react-bootstrap/Form';
 
 export default function PokemonForm({pokemonForCatch}) {
   const types = extractTypes(pokemonForCatch?.types)
@@ -15,9 +16,9 @@ export default function PokemonForm({pokemonForCatch}) {
         </span>
       </div>
 
-      <div>
+      <div id="content-abilities">
         <label htmlFor="abilitys">Abilities: </label>
-        <select name="abilitys" id="abilitys">
+        <Form.Select aria-label="Default select example">
           {
             abilities.map((ability, index) => {
               return (
@@ -25,7 +26,7 @@ export default function PokemonForm({pokemonForCatch}) {
               )
             })
           }
-        </select>
+        </Form.Select>
       </div>
     </div>
   )

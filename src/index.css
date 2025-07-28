@@ -11,6 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #grid-main {
@@ -24,13 +25,14 @@
 #main-content {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   align-items: center;
   background-color: var(--color-darkred);
 }
 
 #next_pokemon {
   display: block;
-  margin: auto;
+  margin: 40px auto;
   width: 400px;
   height: 45px;
   background-color: var(--color-darkturquesa);
@@ -41,3 +43,8 @@
   font-weight: bold;
   color: white;
 }
+
+#next_pokemon:hover {
+  background-color:  #1e694b;
+}
+
