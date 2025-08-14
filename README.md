@@ -1,6 +1,6 @@
 # Pokémon Hunting Bot 🧭🔍
 
-Projeto desenvolvido em React + Vite com o objetivo de fornecer uma interface para controle e visualização de ações automatizadas de um bot de caça a Pokémon.
+Projeto desenvolvido em React + Vite com o objetivo de fornecer uma interface para controle e visualização de ações automatizadas de um bot de caça a Pokémon. Além do Python para a construção do bot.
 
 ## 🧩 Tecnologias Utilizadas
 
@@ -8,12 +8,15 @@ Projeto desenvolvido em React + Vite com o objetivo de fornecer uma interface pa
 - [Vite 6](https://vitejs.dev/)
 - [React Router DOM 7](https://reactrouter.com/)
 - [ESLint](https://eslint.org/) para padronização de código
+- [Python](https://www.python.org/) para utilizar no bot
 
 ## 📁 Estrutura
 
 Este projeto segue uma arquitetura simples baseada em React com Vite:
 
 ```bash
+├── backend/             
+│   └──app.py            # Aquivo main do bot 
 ├── src/
 │   └── main.jsx         # Arquivo principal da aplicação
 │   └── assets/          # Imagens e ícones
@@ -37,6 +40,10 @@ cd pokemon-hunting
 
 ```bash
 npm install
+pip install flask requests pyautogui pyscreenshot pillow pytesseract
+: É só o wrapper Python.
+: Você também precisa instalar o Tesseract OCR no Windows: Tesseract OCR
+: Depois, configure o caminho no seu código: pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 ```
 
 3. **Execute o servidor de desenvolvimento:**
@@ -59,6 +66,15 @@ Acesse em seu navegador: [http://localhost:5173](http://localhost:5173)
 - `react`
 - `react-dom`
 - `react-router-dom`
+- `threading`
+- `flask`
+- `jsonify`
+- `pyautogui`
+- `imageGrab`
+- `Image`
+- `time`
+- `pytesseract`
+
 
 ## 🛡️ Licença
 
