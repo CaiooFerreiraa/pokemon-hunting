@@ -12,7 +12,7 @@ export default function CardPokemon({ pokemonForCatch }) {
         <PokemonImage pokemonForCatch={pokemonForCatch}/>
         <div id="body-pokemon">
           <PokemonForm pokemonForCatch={pokemonForCatch}/>
-          <PokemonActions />
+          <PokemonActions pokemonForCatch={pokemonForCatch}/>
         </div>
       </div>
       <PokemonLog />
