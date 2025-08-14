@@ -1,7 +1,7 @@
 import { extractTypes, extractAbilities } from "../../UtilFunctions"
 import Form from 'react-bootstrap/Form';
 
-export default function PokemonForm({pokemonForCatch}) {
+export default function PokemonForm({ pokemonForCatch }) {
   const types = extractTypes(pokemonForCatch?.types)
   const abilities = extractAbilities(pokemonForCatch?.abilities)
 
