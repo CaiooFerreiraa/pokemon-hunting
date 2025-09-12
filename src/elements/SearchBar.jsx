@@ -8,7 +8,7 @@ export default function SearchBar({ setPokemonForCatch, fetchError, setFerchErro
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=${offSetPokemon}`)
-      .then(res => res.json())
+      .then(responseApi => responseApi.json())
       .then(data => setPokemonList(data.results))
       .catch(error => setFerchError(error));
   }, [offSetPokemon]);
@@ -28,9 +28,9 @@ export default function SearchBar({ setPokemonForCatch, fetchError, setFerchErro
 
   function fetchPokemonByName(name) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Pokemon não encontrado ou nome incorreto");
-        return res.json();  
+      .then(responseApi => {
+        if (!responseApi.ok) throw new Error("Pokemon não encontrado ou nome incorreto");
+        return responseApi.json();  
       })
       .then(foundPokemon => {
         setPokemonForCatch(foundPokemon);

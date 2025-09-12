@@ -16,10 +16,10 @@ export default function App() {
 
   function fetchPokemonById(id) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then(response => {
-        if (!response.ok) throw new Error("O id não foi encontrado")
+      .then(responseApi => {
+        if (!responseApi.ok) throw new Error("O id não foi encontrado")
         
-        return response.json();
+        return responseApi.json();
       })
       .then(foundPokemon => {
         setPokemonForCatch(foundPokemon);

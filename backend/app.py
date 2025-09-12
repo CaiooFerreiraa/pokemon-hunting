@@ -68,7 +68,7 @@ def usarFalseSwipe():
         print("[usarFalseSwipe] False Swipe não encontrado.")
 
 # API para iniciar a captura
-@app.route("/start-capture/<name>", methods=["GET"])
+@app.route("/start-capture/<name>", methods=["POST"])
 def start_capture(name):
     global cond, namePokemon, pokemonSucessCaugth
     namePokemon = name.lower()
