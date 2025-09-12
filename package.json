@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:vite\" \"npm run dev:flask\"",
     "dev:vite": "vite",
-    "dev:flask": "cd ./backend && .venv\\Scripts\\python.exe app.py",
+    "dev:flask": "cd ./backend && python.exe app.py",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

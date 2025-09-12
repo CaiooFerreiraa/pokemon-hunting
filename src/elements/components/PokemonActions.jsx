@@ -2,14 +2,14 @@ export default function PokemonActions({ pokemonForCatch }) {
   const name = pokemonForCatch?.name;
 
   const handleCapture = () => {
-    fetch(`http://127.0.0.1:5500/capture`)
+    fetch(`http://127.0.0.1:5500/start-capture/${name}`, {method: "POST"})
       .then(responseBotPython => responseBotPython.json())
       .then(responseMenssage => console.log(responseMenssage))
       .catch(err => console.error(err))
   }
 
   const handleSend = () => {
-    fetch(`http://127.0.0.1:5500/start-capture/${name}`)
+    fetch(`http://127.0.0.1:5500/define_pokemon/${name}`, {method: "POST"})
       .then(responseBotPython => responseBotPython.json())
       .then(responseMenssage => console.log(responseMenssage))
       .catch(err => console.error(err))

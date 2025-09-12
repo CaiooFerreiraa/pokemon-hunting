@@ -74,10 +74,19 @@ def start_capture(name):
     namePokemon = name.lower()
     pokemonSucessCaugth = f"success!youcaught{namePokemon}"
     cond = True
+
+    t = threading.Thread(target=loop_captura, daemon=True)
+    t.start()
+
     return jsonify({"status": "Captura iniciada", "pokemon": namePokemon})
 
-# Cria o loop de captura
-@app.route("/capture", methods=["GET"])
+@app.route("/define_pokemon/<name>", methods=["POST"])
+def define_pokemon(name):
+    global namePokemon
+    namePokemon = name.lower()
+
+    return jsonify({"status": "Pokemon definido", "pokemon": namePokemon})
+
 def loop_captura():
     global cond, namePokemon, pokemonSucessCaugth
     time.sleep(3)
@@ -112,5 +121,4 @@ def stop_capture():
     return jsonify({"status": "Captura parada"})
 
 if __name__ == "__main__":
-    threading.Thread(target=loop_captura, daemon=True).start()
     app.run(debug=True, host="127.0.0.1", port=5500)
