@@ -95,6 +95,11 @@ def loop_captura():
             time.sleep(1)
             continue
 
+        pyautogui.keyUp('a')
+        pyautogui.keyDown("d")
+        time.sleep(2)
+        pyautogui.keyDown("a")
+
         screenshot = imageGrab.grab()
         screenshot.save("test.jpeg", "JPEG")
         img = Image.open("test.jpeg")
