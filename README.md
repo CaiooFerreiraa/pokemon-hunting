@@ -1,4 +1,4 @@
-# Pokémon Hunting Bot 🧭🔍
+# Pokémon Hunting Bot para o jogo Pokemon Revolution Online 🧭🔍
 
 Projeto desenvolvido em React + Vite com o objetivo de fornecer uma interface para controle e visualização de ações automatizadas de um bot de caça a Pokémon. Além do Python para a construção do bot.
 
@@ -27,7 +27,7 @@ Este projeto segue uma arquitetura simples baseada em React com Vite:
 ├── package.json         # Dependências e scripts
 ```
 
-## 🚀 Como executar o projeto
+## 🚀 Como executar o projeto caso queira mexer com o código
 
 1. **Clone o repositório:**
 
@@ -54,12 +54,19 @@ npm run dev
 
 Acesse em seu navegador: [http://localhost:5173](http://localhost:5173)
 
+## Para executar apenas o programa
+
+```bash
+Execute o app.exe no seu computador, escolha o pokemon na interface, clique em "Send to Bot", com o a aba do jogo aberta, retire o log e clique em "Define Area", em seguida em "Start Hunting" e pronto só deixar o app rodando
+```
+
 ## 🧪 Scripts disponíveis
 
 - `npm run dev`: Inicia o servidor de desenvolvimento
 - `npm run build`: Cria a versão de produção
 - `npm run preview`: Visualiza a build de produção localmente
 - `npm run lint`: Verifica problemas de lint no código
+- `npm run build-exec`: Atualiza o Executavel
 
 ## 📦 Dependências
 
@@ -74,7 +81,7 @@ Acesse em seu navegador: [http://localhost:5173](http://localhost:5173)
 - `Image`
 - `time`
 - `pytesseract`
-
+- `mss`
 
 ## 🛡️ Licença
 
