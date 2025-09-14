@@ -35,15 +35,11 @@ def captura():
         img = screenshot_region(crop_area)
         text = pytesseract.image_to_string(img)
         normalized_text = text.lower().replace(" ", "")
-
-        print(f"[Captura] Texto: {text.strip()}")
         pyautogui.press('3')
 
         if pokemonSucessCaugth in normalized_text:
-            print("[Captura] Captura concluída!")
             break
         else:
-            print("[Captura] Ainda capturando...")
             pyautogui.press('1')
         time.sleep(1)
 
@@ -54,14 +50,10 @@ def usarFalseSwipe():
     img = screenshot_region(crop_area)
     text = pytesseract.image_to_string(img)
     normalized_text = text.lower().replace(" ","")
-    print(f"[usarFalseSwipe] Texto: {text.strip()}")
 
     if "falseswipe" in normalized_text:
-        print("[usarFalseSwipe] False Swipe detectado → captura()")
         pyautogui.press('3')
         captura()
-    else:
-        print("[usarFalseSwipe] False Swipe não encontrado.")
 
 def loop_captura():
     global crop_area
@@ -80,16 +72,12 @@ def loop_captura():
         text = pytesseract.image_to_string(img)
         normalized_text = text.lower().replace(" ", "")
 
-        print(f"[Loop] Texto: {text.strip()}")
-
         if namePokemon and namePokemon in normalized_text:
-            print(f"[Loop] {namePokemon} detectado!")
             pyautogui.press('1')
             usarFalseSwipe()
         else:
-            print(f"[Loop] {namePokemon} não encontrado.")
             pyautogui.press('4')
-        time.sleep(1)
+        time.sleep(0.5)
 
 # ========== Endpoints ==========
 @app.route("/define_pokemon/<name>", methods=["POST"])
