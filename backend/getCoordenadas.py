@@ -57,7 +57,7 @@ def select_area():
     root.mainloop()
     return coords
 
-def load_coords():
+def loadCoords():
     """Carrega coords.json se existir."""
     if os.path.exists(save_path):
         with open(save_path, "r") as f:
