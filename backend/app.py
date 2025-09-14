@@ -108,4 +108,4 @@ if __name__ == "__main__":
     threading.Thread(target=loop_captura, daemon=True).start()
     # Inicia o servidor Flask
     app.run(debug=True)
-    webbrowser.open()
+    webbrowser.open("https://pokemon-hunting.vercel.app/")
