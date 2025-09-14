@@ -57,7 +57,10 @@ Acesse em seu navegador: [http://localhost:5173](http://localhost:5173)
 ## Para executar apenas o programa
 
 ```bash
-Execute o app.exe no seu computador, escolha o pokemon na interface, clique em "Send to Bot", com o a aba do jogo aberta, retire o log e clique em "Define Area", em seguida em "Start Hunting" e pronto só deixar o app rodando
+Execute o app.exe no seu computador, escolha o pokemon na interface
+ clique em "Send to Bot", com o a aba do jogo aberta
+ retire o log e clique em "Define Area"
+ em seguida em "Start Hunting" e pronto só deixar o app rodando
 ```
 
 ## 🧪 Scripts disponíveis
