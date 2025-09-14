@@ -64,6 +64,12 @@ def usarFalseSwipe():
 
 def loop_captura():
     crop_area = (645, 500, 1093, 750)
+
+    pyautogui.keyUp('a')
+    pyautogui.keyDown('d')
+    time.sleep(1)
+    pyautogui.keyDown('a')
+
     while cond:
         img = screenshot_region(crop_area)
         text = pytesseract.image_to_string(img)
