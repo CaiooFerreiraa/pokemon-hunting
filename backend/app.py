@@ -1,33 +1,22 @@
 import threading
 from flask import Flask, jsonify
+import requests
 import pyautogui
 import pyscreenshot as imageGrab
 from PIL import Image
 import time
-import os, sys, pytesseract
-
-if getattr(sys, 'frozen', False):
-    # Estamos rodando no executável do PyInstaller
-    BASE_DIR = sys._MEIPASS
-else:
-    # Estamos rodando em modo normal
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-pytesseract.pytesseract.tesseract_cmd = os.path.join(BASE_DIR, "Tesseract-OCR", "tesseract.exe")
-
+import pytesseract
 
 app = Flask(__name__)
 
-pyautogui.FAILSAFE = False
-
 # Configurações
-namePokemon = None  # Inicialmente sem alvo
-pokemonSucessCaugth = None
-cond = False  # Bot parado até receber comando
+namePokemon = "charmander"
+pokemonSucessCaugth = f"success!youcaught{namePokemon}"
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+cond = True
 
 def captura():
     time.sleep(5)
-    # Tirar nova screenshot
     screenshot = imageGrab.grab()
     screenshot.save("test.jpeg", "JPEG")
 
@@ -41,7 +30,6 @@ def captura():
     while True:
         pyautogui.press('3')
         print(f"[Captura] Texto encontrado: {text.strip()}")
-        #caught Charmander
         if pokemonSucessCaugth in normalized_text:
             print("[Captura] A captura terminou.")
             break
@@ -76,39 +64,10 @@ def usarFalseSwipe():
     else:
         print("[usarFalseSwipe] False Swipe não encontrado.")
 
-# API para iniciar a captura
-@app.route("/start-capture/<name>", methods=["POST"])
-def start_capture(name):
-    global cond, namePokemon, pokemonSucessCaugth
-    namePokemon = name.lower()
-    pokemonSucessCaugth = f"success!youcaught{namePokemon}"
-    cond = True
-
-    t = threading.Thread(target=loop_captura, daemon=True)
-    t.start()
-
-    return jsonify({"status": "Captura iniciada", "pokemon": namePokemon})
-
-@app.route("/define_pokemon/<name>", methods=["POST"])
-def define_pokemon(name):
-    global namePokemon
-    namePokemon = name.lower()
-
-    return jsonify({"status": "Pokemon definido", "pokemon": namePokemon})
-
 def loop_captura():
-    global cond, namePokemon, pokemonSucessCaugth
-    time.sleep(3)
+    """Loop infinito de detecção do Pokémon"""
+    time.sleep(5)
     while cond:
-        if not namePokemon:
-            time.sleep(1)
-            continue
-
-        pyautogui.keyUp('a')
-        pyautogui.keyDown("d")
-        time.sleep(2)
-        pyautogui.keyDown("a")
-
         screenshot = imageGrab.grab()
         screenshot.save("test.jpeg", "JPEG")
         img = Image.open("test.jpeg")
@@ -127,12 +86,24 @@ def loop_captura():
             print(f"[Main Loop] {namePokemon} não encontrado...")
             pyautogui.press('4')
 
-# API para parar a captura
-@app.route("/stop-capture", methods=["GET"])
-def stop_capture():
-    global cond
-    cond = False
-    return jsonify({"status": "Captura parada"})
+# Rota da API
+@app.route("/pokemon/<name>")
+def get_pokemon(name):
+    url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify({
+            "name": data["name"],
+            "sprite": data["sprites"]["front_default"],
+            "types": [t["type"]["name"] for t in data["types"]]
+        })
+    else:
+        return jsonify({"error": "Pokémon não encontrado"}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5500)
+    # Inicia o loop de captura em segundo plano
+    threading.Thread(target=loop_captura, daemon=True).start()
+    # Inicia o servidor Flask
+    app.run(debug=True)
