@@ -6,6 +6,7 @@ import pyscreenshot as imageGrab
 from PIL import Image
 import time
 import pytesseract
+import webbrowser
 
 app = Flask(__name__)
 
@@ -107,3 +108,4 @@ if __name__ == "__main__":
     threading.Thread(target=loop_captura, daemon=True).start()
     # Inicia o servidor Flask
     app.run(debug=True)
+    webbrowser.open()
