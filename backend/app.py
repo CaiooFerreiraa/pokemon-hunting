@@ -4,7 +4,17 @@ import pyautogui
 import pyscreenshot as imageGrab
 from PIL import Image
 import time
-import pytesseract
+import os, sys, pytesseract
+
+if getattr(sys, 'frozen', False):
+    # Estamos rodando no executável do PyInstaller
+    BASE_DIR = sys._MEIPASS
+else:
+    # Estamos rodando em modo normal
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+pytesseract.pytesseract.tesseract_cmd = os.path.join(BASE_DIR, "Tesseract-OCR", "tesseract.exe")
+
 
 app = Flask(__name__)
 
@@ -13,7 +23,6 @@ pyautogui.FAILSAFE = False
 # Configurações
 namePokemon = None  # Inicialmente sem alvo
 pokemonSucessCaugth = None
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 cond = False  # Bot parado até receber comando
 
 def captura():

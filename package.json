@@ -9,7 +9,8 @@
     "dev:flask": "cd ./backend && python.exe app.py",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-exec": "python -m PyInstaller --onefile --add-data \"Tesseract-OCR;Tesseract-OCR\" app.py"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
