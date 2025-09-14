@@ -22,11 +22,19 @@ export default function PokemonActions({ pokemonForCatch }) {
         .catch(error => console.error(error))
   }
 
+  const handleDefineArea =() => {
+    fetch(`http://127.0.0.1:5500/define_area`)
+      .then(responseDefineArea => responseDefineArea.json())
+      .then(msgDefineArea => console.log(msgDefineArea))
+      .catch(err => console.error(err))
+  }
+
   return (
     <div id="buttons-actions">
       <button onClick={handleCapture}>Start Hunting</button>
       <button onClick={handleSend}>Send to Bot</button>
       <button onClick={handleStop}>Mark Aound</button>
+      <button onClick={handleDefineArea}>Define Area</button>
     </div>
   )
 } 

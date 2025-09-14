@@ -1,6 +1,5 @@
 import threading
 from flask import Flask, jsonify
-import requests
 import os
 import pyautogui
 from PIL import Image
@@ -8,6 +7,7 @@ import time
 import pytesseract
 import mss
 import webbrowser
+import getCoordenadas
 
 app = Flask(__name__)
 
@@ -15,20 +15,22 @@ app = Flask(__name__)
 namePokemon = None
 pokemonSucessCaugth = None
 cond = False
+crop_area = getCoordenadas.load_coords()  # Carrega coords.json se existir
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 pytesseract.pytesseract.tesseract_cmd = os.path.join(BASE_DIR, "Tesseract-OCR", "tesseract.exe")
 
 # ========== Funções utilitárias ==========
 def screenshot_region(crop_area):
-    """Captura a tela e retorna apenas a região cortada"""
+    if crop_area is None:
+        raise ValueError("crop_area não definido! Defina a área antes de iniciar a captura.")
+
     with mss.mss() as sct:
         screenshot = sct.grab(sct.monitors[1])
         img = Image.frombytes("RGB", screenshot.size, screenshot.rgb)
         return img.crop(crop_area)
 
 def captura():
-    crop_area = (645, 500, 1093, 750)
     while True:
         img = screenshot_region(crop_area)
         text = pytesseract.image_to_string(img)
@@ -46,7 +48,6 @@ def captura():
         time.sleep(1)
 
 def usarFalseSwipe():
-    crop_area = (645, 500, 1093, 750)
     pyautogui.press('1')
     time.sleep(3)
 
@@ -63,14 +64,18 @@ def usarFalseSwipe():
         print("[usarFalseSwipe] False Swipe não encontrado.")
 
 def loop_captura():
-    crop_area = (645, 500, 1093, 750)
+    global crop_area
 
-    pyautogui.keyUp('a')
-    pyautogui.keyDown('d')
-    time.sleep(1)
-    pyautogui.keyDown('a')
+    if crop_area is None:
+        print("[Loop] Erro: crop_area não definido!")
+        return
 
     while cond:
+        pyautogui.keyUp('a')
+        pyautogui.keyDown('d')
+        time.sleep(1)
+        pyautogui.keyDown('a')
+
         img = screenshot_region(crop_area)
         text = pytesseract.image_to_string(img)
         normalized_text = text.lower().replace(" ", "")
@@ -91,12 +96,20 @@ def loop_captura():
 def get_pokemon(name):
     global namePokemon
     namePokemon = name
-
     return jsonify({"status": "Pokemon definido", "pokemon": namePokemon})
+
+@app.route("/define_area", methods=["GET"])
+def define_area():
+    global crop_area
+    crop_area = getCoordenadas.select_area()
+    return jsonify({"status": "Área definida", "coords": crop_area})
 
 @app.route("/start-capture/<name>", methods=["POST"])
 def start_capture(name):
     global cond, namePokemon, pokemonSucessCaugth
+    if crop_area is None:
+        return jsonify({"status": "Erro", "message": "Defina a área primeiro!"})
+
     namePokemon = name.lower()
     pokemonSucessCaugth = f"success!youcaught{namePokemon}"
     cond = True
@@ -111,7 +124,7 @@ def stop_capture():
 
 @app.route("/status", methods=["GET"])
 def status():
-    return jsonify({"running": cond, "pokemon": namePokemon})
+    return jsonify({"running": cond, "pokemon": namePokemon, "crop_area": crop_area})
 
 if __name__ == "__main__":
     def open_browser():
@@ -119,5 +132,4 @@ if __name__ == "__main__":
         webbrowser.open("https://pokemon-hunting.vercel.app/")
 
     threading.Thread(target=open_browser, daemon=True).start()
-
     app.run(debug=True, port=5500, use_reloader=False)

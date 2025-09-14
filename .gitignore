@@ -38,6 +38,7 @@ build/
 # Imagens e arquivos temporários
 backend/*.jpeg
 backend/*.png
+coords.json
 
 # Cache do Python
 __pycache__/
