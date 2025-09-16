@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:vite\" \"npm run dev:flask\"",
     "dev:vite": "vite",
-    "dev:flask": "cd ./backend && python.exe app.py",
+    "dev:flask": "cd ./backend && python.exe BotPokemon.py",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build-exec": "python -m PyInstaller --onefile --add-data \"Tesseract-OCR;Tesseract-OCR\" app.py"
+    "build-exec": "cd ./backend && python -m PyInstaller --onefile --add-data \"Tesseract-OCR;Tesseract-OCR\" BotPokemon.py getCoordenadas.py CapturePokemon.py"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
