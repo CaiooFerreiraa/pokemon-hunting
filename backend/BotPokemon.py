@@ -1,16 +1,17 @@
 import threading, time
 from flask import Flask, jsonify
 import webbrowser, getCoordenadas
-from CapturePokemon import CapturePokemon
+from CapturePokemon import ActionsForCapturePokemon
 
 botAplication = Flask(__name__)
+actionsForCapturePokemon = ActionsForCapturePokemon()
 
 # ========== Endpoints ==========
 @botAplication.route("/define_pokemon/<name>", methods=["POST"])
 def definePokemon(name):
-    CapturePokemon.setNamePokemonBeighHunted(name)
-    CapturePokemon.setPokemonSuccessfulyCaugth(name)
-    return jsonify({"status": "Pokemon definido", "pokemon": CapturePokemon.getPokemonHunted()})
+    actionsForCapturePokemon.setNamePokemonBeighHunted(name)
+    actionsForCapturePokemon.setPokemonSuccessfulyCaugth(name)
+    return jsonify({"status": "Pokemon definido", "pokemon": actionsForCapturePokemon.getPokemonHunted()})
 
 @botAplication.route("/define_area", methods=["GET"])
 def defineArea():
@@ -19,15 +20,15 @@ def defineArea():
 
 @botAplication.route("/start-capture/<name>", methods=["POST"])
 def startCapture(name):
-    CapturePokemon.checkCropAreaExists()
-    CapturePokemon.setNamePokemonBeighHunted(name.lower())
-    CapturePokemon.setConditionLoop(True)
-    threading.Thread(target=CapturePokemon.loopCapture(), daemon=True).start()
-    return jsonify({"status": "captura iniciada", "pokemon": CapturePokemon.getPokemonHunted()})
+    actionsForCapturePokemon.checkCropAreaExists()
+    actionsForCapturePokemon.setNamePokemonBeighHunted(name.lower())
+    actionsForCapturePokemon.setConditionLoop(True)
+    threading.Thread(target=actionsForCapturePokemon.loopCapture(), daemon=True).start()
+    return jsonify({"status": "captura iniciada", "pokemon": actionsForCapturePokemon.getPokemonHunted()})
 
 @botAplication.route("/stop-capture", methods=["GET"])
 def stopCapture():
-    CapturePokemon.setConditionLoop(False)
+    actionsForCapturePokemon.setConditionLoop(False)
     return jsonify({"status": "captura parada"})
 
 if __name__ == "__main__":

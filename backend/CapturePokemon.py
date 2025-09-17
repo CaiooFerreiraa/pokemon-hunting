@@ -3,7 +3,7 @@ import os, pytesseract, mss
 from flask import jsonify
 from PIL import Image
 
-class CapturePokemon:
+class ActionsForCapturePokemon:
   namePokemonBeingHunted = None
   pokemonSuccessfulyCaugth = None
   conditionLoop = False
@@ -12,16 +12,15 @@ class CapturePokemon:
   BASE_DIR = os.path.dirname(os.path.abspath(__file__))
   pytesseract.pytesseract.tesseract_cmd = os.path.join(BASE_DIR, "Tesseract-OCR", "tesseract.exe")
 
-  @staticmethod
   def loopCapture():
-    if CapturePokemon.crop_area is None:
+    if ActionsForCapturePokemon.crop_area is None:
         return
     
-    while CapturePokemon.conditionLoop:
-        CapturePokemon.botMovement()
-        if CapturePokemon.namePokemonBeingHunted in CapturePokemon.normalizedText():
+    while ActionsForCapturePokemon.conditionLoop:
+        ActionsForCapturePokemon.botMovement()
+        if ActionsForCapturePokemon.namePokemonBeingHunted in ActionsForCapturePokemon.normalizedText():
             pyautogui.press('1')
-            CapturePokemon.useFalseSwipe()
+            ActionsForCapturePokemon.useFalseSwipe()
         else:
             pyautogui.press('4')
         time.sleep(0.2)
@@ -32,9 +31,8 @@ class CapturePokemon:
       time.sleep(1)
       pyautogui.keyDown('a')
 
-  @staticmethod
   def normalizedText():
-    image = CapturePokemon.screenshot_region(CapturePokemon.crop_area)
+    image = ActionsForCapturePokemon.screenshot_region(ActionsForCapturePokemon.crop_area)
     text = pytesseract.image_to_string(image)
     return text.lower().replace(" ", "")
   
@@ -47,45 +45,37 @@ class CapturePokemon:
         imageScreen = Image.frombytes("RGB", screenshot.size, screenshot.rgb)
         return imageScreen.crop(crop_area)
 
-  @staticmethod  
   def useFalseSwipe():
     pyautogui.press('1')
     time.sleep(3)
-    if CapturePokemon.useMove in CapturePokemon.normalizedText():
+    if ActionsForCapturePokemon.useMove in ActionsForCapturePokemon.normalizedText():
       pyautogui.press('3')
-      CapturePokemon.catchPokemon()
+      ActionsForCapturePokemon.catchPokemon()
 
-  @staticmethod
   def catchPokemon():
     while True:
         pyautogui.press('3')
-        if CapturePokemon.pokemonSuccessfulyCaugth in CapturePokemon.normalizedText():
+        if ActionsForCapturePokemon.pokemonSuccessfulyCaugth in ActionsForCapturePokemon.normalizedText():
             break
         else:
             pyautogui.press('1')
         time.sleep(1)
   
-  @staticmethod
   def getCropArea():
     return getCoordenadas.loadCoords()
   
-  @staticmethod
   def getPokemonHunted():
-    return CapturePokemon.namePokemonBeingHunted
+    return ActionsForCapturePokemon.namePokemonBeingHunted
 
-  @staticmethod
   def setNamePokemonBeighHunted(name):
-    CapturePokemon.namePokemonBeingHunted = name
+    ActionsForCapturePokemon.namePokemonBeingHunted = name
 
-  @staticmethod
   def setPokemonSuccessfulyCaugth(msgPokemon):
-    CapturePokemon.pokemonSuccessfulyCaugth = f"success!youcaught{msgPokemon.lower()}"
+    ActionsForCapturePokemon.pokemonSuccessfulyCaugth = f"success!youcaught{msgPokemon.lower()}"
   
-  @staticmethod
   def setConditionLoop(condition):
-    CapturePokemon.conditionLoop = condition
+    ActionsForCapturePokemon.conditionLoop = condition
 
-  @staticmethod
   def checkCropAreaExists():
-    if CapturePokemon.getCropArea() is None:
+    if ActionsForCapturePokemon.getCropArea() is None:
       return jsonify({"status": "Erro", "message": "Defina a área primeiro!"})
